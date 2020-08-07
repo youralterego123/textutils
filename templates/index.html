@@ -3,6 +3,8 @@
     <head>
         <title>Textutils</title>
         <!-- CSS only -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 <!-- JS, Popper.js, and jQuery -->
@@ -37,7 +39,7 @@
        
         <form action="/analyze" method="POST">{% csrf_token %}
             <div class="form-group">
-               <h1><label for="exampleFormControlTextarea1">Enter your text below.</label></h1> 
+               <h1 class="ml3 chk"><label for="exampleFormControlTextarea1">ENTER YOUR TEXT BELOW.</label></h1> 
                 <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="9"></textarea>
               </div>
             <br>
@@ -60,7 +62,47 @@
               <br>
               <button type="submit" class="btn btn-outline-primary">Analyze Text</button>
         </form>
-    </div>   
+    </div> 
+    
+ <footer>
+   <div class="foot">
+     <h3>&copy 2020 - Textutils</h3>
+   </div>
+ </footer>
+    <style>
+      .chk{
+       color: rgb(104, 180, 243);
+      }
+      .foot{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        text-align: center;
+        background-color: rgba(137, 196, 244, 1);
+      }
+         
+      </style>
+      
+      <script>
+        var textWrapper = document.querySelector('.ml3');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+          anime.timeline({loop: true})
+          .add({
+            targets: '.ml3 .letter',
+            opacity: [0,1],
+            easing: "easeInOutQuad",
+            duration: 100,
+            delay: (el, i) => 150 * (i+1)
+          }).add({
+            targets: '.ml3',
+            opacity: 0,
+            duration: 100,
+            easing: "easeOutExpo",
+            delay: 100
+          });
+      </script>
     </body>
     
 </html>
